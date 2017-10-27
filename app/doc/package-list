@@ -1,0 +1,6 @@
+com.supermarket.app
+com.supermarket.app.controller
+com.supermarket.app.dto
+com.supermarket.app.entity
+com.supermarket.app.repository
+com.supermarket.app.service
