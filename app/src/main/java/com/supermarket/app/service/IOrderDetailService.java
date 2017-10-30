@@ -29,8 +29,11 @@ public interface IOrderDetailService {
 	 * 
 	 * @param order,
 	 *            {@link Order}
-	 * @return, List<{@link Order}>
+	 * @param requestId,
+	 *            request number generated for users in petition 
+	 * @return,
+	 *            List<{@link Order}>
 	 */
-	List<OrderDetailDTO> getOrderDetailsByOrder(Order order);
+	List<OrderDetailDTO> getOrderDetailsByOrder(Order order, String requestId);
 
 }

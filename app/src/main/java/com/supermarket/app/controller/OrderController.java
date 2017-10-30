@@ -80,10 +80,11 @@ public class OrderController {
 
 			_logger.info("[OrderController][getOrderList][" + requestId + "] Started.");
 
-			List<OrderResponseDTO> ordersList = orderService.getOrdersList(registeredEmail, startDate, endDate);
+			List<OrderResponseDTO> ordersList = orderService.getOrdersList(registeredEmail, startDate, endDate, requestId);
+			
+			_logger.info("[OrderController][getOrderList][" + requestId + "] Finish.");
 
 			return new ResultDTO(true, "Successfully operation.", ordersList, ordersList.size());
-//			return new ResultDTO(true, "Successfully operation.", "hola", 0L);
 
 		} catch (Exception e) {
 			_logger.error("GET=/ordersList method", e);

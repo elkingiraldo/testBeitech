@@ -34,8 +34,11 @@ public interface IOrderService {
 	 *            Initial date of a range time requested
 	 * @param endDate,
 	 *            End date of a rage time requested
+	 * @param requestId,
+	 *            request generated in users petition
 	 * @return List<OrderResponseDTO>, orders list in the selected range list
 	 */
-	public List<OrderResponseDTO> getOrdersList(String registeredEmail, String initialDate, String endDate) throws Exception;
+	public List<OrderResponseDTO> getOrdersList(String registeredEmail, String initialDate, String endDate,
+			String requestId) throws Exception;
 
 }

@@ -52,7 +52,7 @@ public class OrderServiceImpl implements IOrderService {
 
 		// Search Customer Entity
 		String emailRegistered = orderRequest.getRegisteredEmail();
-		Customer customer = customerService.getCustomerEntityByEmail(emailRegistered);
+		Customer customer = customerService.getCustomerEntityByEmail(emailRegistered, requestId);
 
 		// Verify the user exists
 		if (customer == null) {
@@ -137,12 +137,14 @@ public class OrderServiceImpl implements IOrderService {
 	}
 
 	@Override
-	public List<OrderResponseDTO> getOrdersList(String registeredEmail, String initialDate, String endDate)
-			throws Exception {
+	public List<OrderResponseDTO> getOrdersList(String registeredEmail, String initialDate, String endDate,
+			String requestId) throws Exception {
+
+		_logger.info("[OrderServiceImpl][getOrderList][" + requestId + "] Started.");
 
 		// Search Customer Entity
 		String emailRegistered = registeredEmail;
-		Customer customer = customerService.getCustomerEntityByEmail(emailRegistered);
+		Customer customer = customerService.getCustomerEntityByEmail(emailRegistered, requestId);
 
 		// Verify the user exists
 		if (customer == null) {
@@ -153,11 +155,6 @@ public class OrderServiceImpl implements IOrderService {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-dd HH:mm:ss");
 		Date dateInitial = sdf.parse(initialDate);
 		Date dateFinal = sdf.parse(endDate);
-
-		// DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd
-		// HH:mm:ss");
-		// LocalDate parsedDateStart = LocalDate.parse(initialDate, formatter);
-		// LocalDate parsedDateEnd = LocalDate.parse(endDate, formatter);
 
 		// find orders in DB related with specific user request
 		List<Order> ordersList = orderRepository.findBycreatedOnBetween(dateInitial, dateFinal);
@@ -182,7 +179,7 @@ public class OrderServiceImpl implements IOrderService {
 				orderResponseDTO.setOrderPrice(order.getOrderPrice());
 
 				// obtain the order details
-				orderDetailDtoList = orderDetailService.getOrderDetailsByOrder(order);
+				orderDetailDtoList = orderDetailService.getOrderDetailsByOrder(order, requestId);
 
 				orderResponseDTO.setListOrderDetail(orderDetailDtoList);
 
@@ -193,6 +190,8 @@ public class OrderServiceImpl implements IOrderService {
 
 		}
 
+		_logger.info("[OrderServiceImpl][getOrderList][" + requestId
+				+ "] Finished and return a order response dto list of size: " + orderResponseDtoList.size());
 		return orderResponseDtoList;
 	}
 
