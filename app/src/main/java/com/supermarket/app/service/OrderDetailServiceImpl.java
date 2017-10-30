@@ -41,10 +41,11 @@ public class OrderDetailServiceImpl implements IOrderDetailService {
 
 		// initialize order detail dto and order detail dto list
 		List<OrderDetailDTO> orderDetailDtoList = new ArrayList<OrderDetailDTO>();
-		OrderDetailDTO orderDetailDto = new OrderDetailDTO();
+		
 
 		// convert entity to dto and add it to the response list
 		for (OrderDetail orderDetail : orderDetailList) {
+			OrderDetailDTO orderDetailDto = new OrderDetailDTO();
 			orderDetailDto.setDescription(orderDetail.getProductDescription());
 			orderDetailDto.setQuantity(orderDetail.getQuantity());
 
