@@ -162,15 +162,15 @@ public class OrderServiceImpl implements IOrderService {
 		// initialize the response dto list
 		List<OrderResponseDTO> orderResponseDtoList = new ArrayList<OrderResponseDTO>();
 
-		// initialize the response dto
-		OrderResponseDTO orderResponseDTO = new OrderResponseDTO();
-
 		// initialize the response list dto of order details
 		List<OrderDetailDTO> orderDetailDtoList = new ArrayList<>();
 
 		for (Order order : ordersList) {
 			// only takes orders related with the current user
 			if (order.getCustomer().getCustomerId() == customer.getCustomerId()) {
+
+				// initialize the response dto
+				OrderResponseDTO orderResponseDTO = new OrderResponseDTO();
 
 				// set everything we need
 				orderResponseDTO.setCreatedOn(order.getCreatedOn());

@@ -83,8 +83,12 @@ public class OrderController {
 			List<OrderResponseDTO> ordersList = orderService.getOrdersList(registeredEmail, startDate, endDate, requestId);
 			
 			_logger.info("[OrderController][getOrderList][" + requestId + "] Finish.");
-
-			return new ResultDTO(true, "Successfully operation.", ordersList, ordersList.size());
+			
+			if(ordersList.size() == 0){
+				return new ResultDTO(true, "This user don't have orders associates in this period.", ordersList, ordersList.size());
+			} else {
+				return new ResultDTO(true, "Successfully operation.", ordersList, ordersList.size());
+			}
 
 		} catch (Exception e) {
 			_logger.error("GET=/ordersList method", e);
